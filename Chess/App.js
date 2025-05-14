@@ -6,30 +6,28 @@ import {
   Text,
   View,
   Alert,
-  Platform, // Added Platform
-  // Button, // Uncomment if you want a reset button
+  Platform,
+  moment,
+  
 } from 'react-native';
-import ChessBoard, { PieceOnBoard, SQUARE_SIZE } from './src/components/Square.tsx';
-import { PieceColor } from './src/components/Piece';
+import ChessBoard, { SQUARE_SIZE } from './src/components/Square.js'; 
 import {
   setupInitialBoard,
   getValidMoves,
   makeMove,
   checkGameEndStatus,
-  Move,
-  findKing, // Added for kingInCheckPos update
 } from './src/logic/chessLogic';
 
 const App = () => {
-  const [boardState, setBoardState] = useState<(PieceOnBoard | null)[][]>(setupInitialBoard());
-  const [selectedPiece, setSelectedPiece] = useState<PieceOnBoard | null>(null);
-  const [possibleMoves, setPossibleMoves] = useState<Move[]>([]);
-  const [currentTurn, setCurrentTurn] = useState<PieceColor>('white');
-  const [kingInCheckPos, setKingInCheckPos] = useState<Move | null>(null);
+  const [boardState, setBoardState] = useState(setupInitialBoard());
+  const [selectedPiece, setSelectedPiece] = useState(null);
+  const [possibleMoves, setPossibleMoves] = useState([]); 
+  const [currentTurn, setCurrentTurn] = useState('white');
+  const [kingInCheckPos, setKingInCheckPos] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameMessage, setGameMessage] = useState('');
-
-  const updateGameStatus = (currentBoard: (PieceOnBoard | null)[][], turn: PieceColor) => {
+  
+  const updateGameStatus = (currentBoard, turn) => {
     const status = checkGameEndStatus(turn, currentBoard);
     setGameOver(status.gameOver);
     setGameMessage(status.message);
@@ -43,10 +41,9 @@ const App = () => {
     if (!gameOver) {
         updateGameStatus(boardState, currentTurn);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTurn, boardState]);
 
-  const handleSquarePress = (row: number, col: number) => {
+  const handleSquarePress = (row, col) => {
     if (gameOver) return;
 
     const clickedPiece = boardState[row][col];
@@ -62,7 +59,6 @@ const App = () => {
         setPossibleMoves([]);
         const nextTurn = currentTurn === 'white' ? 'black' : 'white';
         setCurrentTurn(nextTurn);
-        // Game status will be updated by useEffect due to currentTurn/boardState change
       } else if (clickedPiece && clickedPiece.color === currentTurn) {
         setSelectedPiece(clickedPiece);
         setPossibleMoves(getValidMoves(clickedPiece, boardState));
@@ -78,12 +74,10 @@ const App = () => {
     }
   };
 
- 
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
-      <Text style={styles.title}>isabellehs Chess</Text>
+      <Text style={styles.title}>ISB Chess Chess</Text>
       <Text style={styles.turnText}>Current Turn: {currentTurn.toUpperCase()}</Text>
       {gameOver && <Text style={styles.gameOverText}>{gameMessage}</Text>}
       <View style={styles.boardOuterContainer}>
@@ -104,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#3F3F3F',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   title: {
@@ -113,6 +107,10 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   turnText: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  moment: { 
     fontSize: 18,
     marginBottom: 10,
   },

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { SQUARE_SIZE } from './Square'; // Assuming Square.tsx exports SQUARE_SIZE
-
+import { SQUARE_SIZE } from './Square.js'; 
 export type PieceType = 'pawn' | 'rook' | 'knight' | 'bishop' | 'queen' | 'king';
 export type PieceColor = 'white' | 'black';
 
@@ -32,7 +31,7 @@ const PIECE_IMAGES = {
 };
 
 const PieceDisplay: React.FC<PieceProps> = ({ type, color }) => {
-  const pieceUnicode: { [key in PieceType]: string } = {
+  const pieceUnicode: { [keyPieceType]: string } = {
     king: color === 'white' ? '\u2654' : '\u265A',
     queen: color === 'white' ? '\u2655' : '\u265B',
     rook: color === 'white' ? '\u2656' : '\u265C',
