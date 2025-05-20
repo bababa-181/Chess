@@ -1,4 +1,4 @@
-import { PieceOnBoard, PieceType, PieceColor } from '../components/Board.tsx';
+import { PieceOnBoard, PieceType, PieceColor } from '../components/Board.js';
 
 
 export interface Move {

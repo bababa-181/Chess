@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { SQUARE_SIZE } from './Square'; // Assuming Square.tsx exports SQUARE_SIZE
+import { SQUARE_SIZE } from './src/components/Square'; // Assuming Square.tsx exports SQUARE_SIZE
 
 export type PieceType = 'pawn' | 'rook' | 'knight' | 'bishop' | 'queen' | 'king';
 export type PieceColor = 'white' | 'black';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import Square, { SQUARE_SIZE } from './Square.tsx';
-import PieceDisplay, { PieceType, PieceColor } from './Piece.tsx';
+import Square, { SQUARE_SIZE } from './src/components/Square.js';
+import PieceDisplay, { PieceType, PieceColor } from './src/components/Piece.js';
 
 export interface PieceOnBoard {
   row: number;
