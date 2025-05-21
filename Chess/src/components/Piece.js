@@ -14,20 +14,20 @@ interface PieceProps {
 
 const PIECE_IMAGES = {
   white: {
-    pawn: require('../../assets/white_pawn.png'),
-    rook: require('../../assets/white_rook.png'),
-    knight: require('../../assets/white_knight.png'),
-    bishop: require('../../assets/white_bishop.png'),
-    queen: require('../../assets/white_queen.png'),
-    king: require('../../assets/white_king.png'),
+    pawn: '♙',
+    rook: '♖',
+    knight: '♘',
+    bishop: '♗',
+    queen: '♕',
+    king: '♔',
   },
   black: {
-    pawn: require('../../assets/black_pawn.png'),
-    rook: require('../../assets/black_rook.png'),
-    knight: require('../../assets/black_knight.png'),
-    bishop: require('../../assets/black_bishop.png'),
-    queen: require('../../assets/black_queen.png'),
-    king: require('../../assets/black_king.png'),
+    pawn: '♟',
+    rook: '♜',
+    knight: '♞',
+    bishop: '♝',
+    queen: '♛',
+    king: '♚',
   },
 };
 
