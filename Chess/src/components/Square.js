@@ -15,13 +15,13 @@ interface SquareProps {
 }
 
 const Square: React.FC<SquareProps> = ({ row, col, isLightSquare, onPress, isSelected, isPossibleMove, isKingInCheck }) => {
-  const backgroundColor = isLightSquare ? '#eeeed2' : '#769656';
+  const backgroundColor = isLightSquare ? 'rgb(240,228,213)' : 'rgb(185,108,12)';
   const highlightColor = isSelected ? 'rgba(100, 240, 100, 0.5)' : isPossibleMove ? 'rgba(255, 255, 0, 0.4)' : isKingInCheck ? 'rgba(255, 0, 0, 0.4)' : undefined;
 
   return (
     <TouchableOpacity onPress={() => onPress(row, col)} style={[styles.square, { backgroundColor }]}>
       {highlightColor && <View style={[styles.highlight, { backgroundColor: highlightColor }]} />}
-      {/* <Text style={styles.debugText}>{`${row},${col}`}</Text> */}
+      { debugtxt }
     </TouchableOpacity>
   );
 };
@@ -37,13 +37,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     zIndex: 1,
   },
-  debugText: {
-    fontSize: 10,
-    color: 'red',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  }
 });
 
 export default Square;

@@ -1,14 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
+<<<<<<< HEAD
 import Square, { SQUARE_SIZE } from './src/components/Square.js';
 import PieceDisplay, { PieceType, PieceColor } from './src/components/Piece.js';
+=======
+import Square, { SQUARE_SIZE } from './Square.js';
+import PieceDisplay, { PieceType, PieceColor } from './Piece.js';
+>>>>>>> faa438062d9c8d2150d7dbaadc0ad8233c05291b
 
 export interface PieceOnBoard {
   row: number;
   col: number;
   type: PieceType;
   color: PieceColor;
-  id: string; // Unique ID for each piece, e.g., 'white_pawn_1'
+  id: string; 
 }
 
 interface ChessBoardProps {
@@ -50,7 +55,7 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ boardData, onSquarePress, selec
     );
   };
 
-  // Flatten the board data for FlatList
+  
   const flatBoardData = boardData.flat();
 
   return (
