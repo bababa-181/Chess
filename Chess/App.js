@@ -1,16 +1,67 @@
-<<<<<<< HEAD
 //Chess App.js
 // import로 불러오기
 import React, { useState, useEffect } from 'react';
 import {PermissionAndriod, SafeAreaView, StyleSheet, 
      Alert, TouchableOpacity, Text, Image, FlatList, Dimensions} from 'react-native';
 import ChessBoard from './src/components/Board.js';
-import { BleManger }  from 'react-native-ble-plx';
+import { BleManager }  from 'react-native-ble-plx';
+import { Platform,PermissionAndriod } from 'react-native';
 
-const manger = new BleManger();
+const manager = new BleManager();
 //블루투스 초기화
 
-export default function BLuetooth
+const startBluetoothConnection = () => {
+     // 블루투스 권한 요청
+     if (Platform.OS === 'android') {
+          try{
+              const granted = await PermissionAndriod.request(
+                PermissionAndriod.PERMISSIONS.BLUETOOTH_CONNNECT
+              );
+          
+              if (granted === PermissionAndriod.RESULTS.GRANTED) {
+                console.log('Bluetooth permission granted');
+              } else {
+                console.log('Bluetooth permission denied');
+                return;
+              }
+          } catch (error) {
+              console.error('Error requesting Bluetooth permission:', error);
+              return;
+          }  
+     }
+     // 블루투스 기기 검색 시작
+     manager.startDeviceScan(null,null, (error, device) => {
+          if (error) {
+               console.error('Error scanning for devices:', error);
+               return;
+          }
+          if (device && device.name && device.name.includes()) {
+               console.log('Found device:', device.name,device.id);
+
+               manager.stopDeviceScan();
+
+               manager.connectToDevice(device.id)
+                .then((device) => {
+                      console.log('Connected to device:', device.name, device.id);
+                      setConnectedDevice(device);
+                      setConnectionStatus('Connected');
+
+                      return device.discoverAllServicesAndCharacteristics();
+                })
+                .catch((error))  
+          }
+     });
+    
+      // 블루투스 기기 검색 중지
+      setTimeout(() => {
+          manager.stopDeviceScan();
+          console.log('Device scan stopped');
+        }, 5000); // 5초 후에 검색 중지
+};
+
+
+
+    
 
 export function App() {
      // boardData: 체스판 상태 저장
@@ -31,8 +82,7 @@ export function App() {
      }, []);
      //빈 배열은 최초 한 번만 실행됨을 의미함
 
-     startBluetoothConnection();
-     //블루투스 시작
+     
      
 
 
@@ -59,10 +109,8 @@ export function App() {
           //한 행 완성 후 반환
           return newRow;
      });
-<<<<<<< Updated upstream
 
 }
-=======
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
@@ -158,19 +206,18 @@ const App = () => {
     </SafeAreaView>
   );
 };
->>>>>>> faa438062d9c8d2150d7dbaadc0ad8233c05291b
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< HEAD
-    backgroundColor: '#000000', 
-    justifyContent: 'center',
-    alignItems: 'center',
-=======
+
+    backgroundColor: '#000000',
+    justifyContent: 'center';
+    alignItems: 'center';
      // 8x8 체스판 형태 반환
      return board;
-     };
+     }
+});
      //앱 전체 레이아웃 스타일 정의
      const styles = StyleSheet.create({
           container: {
@@ -178,70 +225,57 @@ const styles = StyleSheet.create({
           backgroundColor: '#000000', 
           justifyContent: 'center',
           alignItems: 'center',
->>>>>>> Stashed changes
+
   },
 }); 
 
      // 앱 실제 화면 구성
      return (
            <SafeAreaView style={styles.container}>
-<<<<<<< Updated upstream
                <ChessBoard boardData={boardData} />
           </SafeAreaView>
      );   
-     
+};
+    dja {
+    alignItems: 'center';
+    backgroundColor: '#3F3F3F';
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0;
+  };
 
-
-
-     
-     
-     
-
-
-
-
-}
-=======
-    alignItems: 'center',
-    backgroundColor: '#3F3F3F',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-  },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 20,
-  },
+    fontSize: 24;
+    fontWeight: 'bold';
+    marginVertical: 20;
+  };
   turnText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
+    fontSize: 18;
+    marginBottom: 1;
+  };
   moment: { 
-    fontSize: 18,
-    marginBottom: 10,
-  },
+    fontSize: 18;
+    marginBottom: 10;
+  };
   gameOverText: {
-    fontSize: 20,
-    color: 'red',
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
+    fontSize: 20;
+    color: 'red';
+    fontWeight: 'bold';
+    marginBottom: 10;
+  };
   boardOuterContainer: {
-    width: SQUARE_SIZE * 8 + 4, 
-    height: SQUARE_SIZE * 8 + 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#333',
-  }
-});
+    width: SQUARE_SIZE * 8 + 4; 
+    height: SQUARE_SIZE * 8 + 4;
+    justifyContent: 'center';
+    alignItems: 'center';
+    borderWidth: 2;
+    borderColor: '#333';
+  };
 
->>>>>>> faa438062d9c8d2150d7dbaadc0ad8233c05291b
-export default App;
-=======
+
+//export default startBluetoothConnection;
+
                {boardData && <ChessBoard boardData={boardData} />}
-          </SafeAreaView>);
+          
         
-     };
+  
 // App 컴포넌트를 기본으로 내보내기 
   export default App;
->>>>>>> Stashed changes
